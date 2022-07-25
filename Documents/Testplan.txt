@@ -1,0 +1,58 @@
+***** Custom Test Application
+***** Author: Chappidi Yoga Satwik
+***** Roll No. 19CS30013
+***** Date: 07-Mar-2021
+***** Version: 1.0
+***** Known bugs: None
+
+*****************Test Plan*****************
+
+Running instructions:
+
+The makefile will assist us in running the tests.
+There are three tests to be run:
+1. CustomTestApplication.cpp
+    Includes the various scenarios designed by the Author to test the program.
+    In the terminal run the command 'make CustomTestApplication'
+
+2. GivenTestApplication.cpp
+    Contains the test given in the problem document.
+    In the terminal run the command 'make GivenTestApplication'
+
+3. UnitTesting.cpp
+    Contains the various scenarios designed by the Author to test the functionality of different classes used in the project.
+    In the terminal run the command 'make UnitTesting'
+
+4. _MyApplication
+    Performs various types of Bookings
+    - Check fare calculated is invarient of direction of travel
+    - Check fare calculated is invarient of Booking Date
+    - Check fare calculated is invarient of Passenger information
+    - Perform booking all the different booking classes
+    
+
+5. _UnitTesting
+    General Unit Test Principles:
+    - For the singleton classes, check if the address returned upon instantiating multiple times is the same.
+    - For BookingClasses compare the values returned by the methods with the golden output.
+
+    i. Railways:
+        - Check if the distances returned by each pair matches with the golden output.
+        - Check if the return value is same even upon changing the order of parameters in getDistance()
+
+    ii. Stations:
+        - Check if the constructor assigns the name properly.
+        - Check if the copy constructor works properly.
+        - Check if getDistance() method of Stations class works correctly.
+
+    iii. Booking class hierarchy
+        - Abstract base classes
+            To be tested through the concrete classes.
+
+        - Concrete classes
+            Hard code the comparison between the golden output and return value of member functions for each class.
+
+    iv. Bookings
+        - Check if the booking class gets alotted correctly
+        - Check if the PNR number is getting allotted rightly
+        - Hardcode the comparison with the golden output to see if the fare is computed rightly for booking classes of all types

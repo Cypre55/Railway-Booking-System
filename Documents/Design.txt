@@ -1,0 +1,83 @@
+***** Author: Chappidi Yoga Satwik
+***** Roll No. 19CS30013
+***** Date: 07-Mar-2021
+***** Version: 1.0
+***** Known bugs: None
+
++++++Design for Railways Application+++++
+
+	High Level Design:
+	
+	All the attributes which are changeable are made static and placed in a file Statics.h which will be included in all the files having the main() function.
+ 
+		* Stations Class:
+			- Copy constructor and a constructor which takes station name as argument present
+			- HAS-A  const name
+			- Method GetDistance() which returns the distance from this station to any other station
+			- Method GetName() which returns the name of the station
+			- All methods are of const type
+			- Friend funtion overloading output stream operator
+
+		* Railways Class:
+			- Static attributes name, map of string-Station pairs, map of Station pairs-distances
+			- Singleton class implemented using Meyer's method
+			- Constructor made private
+			- Copy constructor and assignment constructor made private but not implemented(blocked)
+			- Static method TheRailways() to return the singleton class object.
+			- Const member method getDistance() to return the distance between a pai of stations.
+			- Friend funtion overloading output stream operator
+
+		* Booking Class Types(Polymorphic Class Hierarchy):
+
+			* BookingClass
+				- The abstract base class BookingClass holds all the pure virtual const methods and protected name of the booking class type.
+				- Protected constructor to assign to name
+				- Copy constructor and copy assginment constructor blocked
+				- Friend funtion overloading output stream operator
+				- Virtual destructor
+
+			* Berth and Seat
+				- Protected constructor to build the BookingClass
+				- Pure virtual function isSitting implemented
+				- Virtual Destructor
+
+			* Concrete Booking Class Types
+				- Singleton class implemented using Meyer's method
+				- Static method Type() returns the singleton class object
+				- Static variables Luxury and LoadFactor initialised in Statics.h, for convenience 
+				  in changing
+				- All the other info of the type encoded in the methods
+				- Destructor made virtual 
+
+		* Booking Class:
+			- Static const variables sACSurcharge, sBaseFarePerKM, sLuxuryTaxPercent, initialised
+			  in Statics.h for ease of changing value
+			- Static variable sPNRserial number initialized to 1, and incremented upon new 	booking
+			- Static Vector to maintain track of all the bookings made so far
+			- Protected Const attributes, PNR number, toStation, fromStation, date, Booking message, booking status, booking class type
+			- Fare made mutable so it can be computed in computeFare function
+			- Public constructor taking as arguments fromStation, toStation, date of travel, booking
+			  class type, and passenger details(nullPassenger for now)
+			- Protected virtual const function computeFare() which computes fare. Virtual in case 
+			  different passengers need different handling.
+			- Public virtual destructor
+			- Public static function to get the list of bookings made so far
+			
+ 	Constants:
+		• Load Factors of various BookingClasses
+		• Base Fare Rate
+		• AC Surcharge
+		• Luxury Tax
+	
+	Statics:
+		• Class Date to have month and day names.
+		• Class Railways to have sStations (list of stations) and sDistStations (distance between stations).
+		• Class BookingClasses to have load factors and the luxury status
+		• Class Booking to have sBaseFarePerKM, sBookings (list of bookings done), sBookingPNRSerial (next
+		  available PNR), sACSurcharge, and sLuxuryTaxPercent
+	
+	Encapsulation:
+		* At places where copy constructors and assignment operators need to be blocked, they are made private
+		* All the non-static and static attributes are private
+		* Virtual destructors are public and constructors for Stations and Bookings class are also public
+		* Methods in the BookingClasses types which return info about the class are public
